@@ -1,0 +1,40 @@
+version: '3.7'
+
+services:
+  nginx:
+    image: gitlab.netzeffekt.de:4567/nfxkreation/docker-dev/nginx:1.0.0
+    volumes:
+      - ./:/var/www/html:delegated
+      - ./docker/nginx/vhost.conf:/etc/nginx/conf.d/vhost.conf:delegated
+    networks:
+      - web
+    ports:
+      - 8080:80
+
+  frontend:
+    image: gitlab.netzeffekt.de:4567/creative-labs/frontend-toolkit/node16:1.1.0
+    volumes:
+      - ./.npmrc:/var/www/html/.npmrc:delegated
+      - ./.storybook:/var/www/html/.storybook:delegated
+      - ./tsconfig.json:/var/www/html/tsconfig.json:delegated
+      - ./package.json:/var/www/html/package.json:cached
+      - ./yarn.lock:/var/www/html/yarn.lock:cached
+      - ./src:/var/www/html/src:delegated
+      - ./stories:/var/www/html/stories:delegated
+      - ./dist/images:/var/www/html/dist/images:delegated
+      - ./dist/styles:/var/www/html/dist/styles:delegated
+      - ./dist/scripts:/var/www/html/dist/scripts:delegated
+      - ./node_modules:/var/www/html/node_modules:cached
+    working_dir: /var/www/html
+    environment:
+      - NODE_PATH=/home/node/.npm-global/lib/node_modules
+    command: sh -c 'yarn && gulp watch'
+    networks:
+      - web
+    ports:
+      - 3000:3000
+      - 3001:3001
+      - 6006:6006
+
+networks:
+  web:
