@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "babel-loader": "^9.1.2",
+    "chromatic": "^7.4.0",
     "storybook-anima": "^1.43.0",
     "typescript": "^5.1.6",
     "vue": "^3.3.4"
