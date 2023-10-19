@@ -1,5 +1,5 @@
 <template>
-    <button class="button" :class="classes" @click="$emit('onClick')">{{ label }}</button>
+    <button class="button" :class="classes" @click="$emit('onClick')" :disabled="isDisabled">{{ label }}</button>
 </template>
 
 <script setup lang="ts">
@@ -11,6 +11,10 @@ import {computed } from 'vue';
             type: Boolean,
             default: false
         }
+        isDisabled: {
+            type: Boolean,
+            default: false
+        }
         theme: {
             type: String,
             default: 'default',
@@ -18,7 +22,8 @@ import {computed } from 'vue';
     }>();
 
     const classes = computed(() => ({
-        'is-rounded': props.isRounded
+        'is-rounded': props.isRounded,
+        'is-disabled': props.isDisabled
     }));
 
     defineEmits<{

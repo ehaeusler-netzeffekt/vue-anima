@@ -9,6 +9,9 @@ export default {
     isRounded: {
       control: 'boolean',
     },
+    isDisabled: {
+      control: 'boolean',
+    },
     onClick: {},
   },
 };
@@ -24,5 +27,12 @@ export const RoundedButton = {
   args: {
     label: 'Rounded Button',
     isRounded: true
+  },
+};
+
+export const DisabledButton = {
+  args: {
+    label: 'Disabled Button',
+    isDisabled: true
   },
 };

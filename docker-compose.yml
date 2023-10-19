@@ -16,6 +16,7 @@ services:
     volumes:
       - ./.npmrc:/var/www/html/.npmrc:delegated
       - ./.storybook:/var/www/html/.storybook:delegated
+      - ./.git:/var/www/html/.git:delegated
       - ./tsconfig.json:/var/www/html/tsconfig.json:delegated
       - ./package.json:/var/www/html/package.json:cached
       - ./yarn.lock:/var/www/html/yarn.lock:cached
